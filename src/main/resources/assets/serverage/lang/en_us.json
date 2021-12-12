@@ -1,0 +1,17 @@
+{
+    "itemGroup.Server_Age": "Server Age",
+
+    "block.serverage.server_rack": "Server Rack",
+    "block.serverage.workstation": "Workstation",
+    "block.serverage.conduit": "Conduit",
+    "item.serverage.server_rack": "Server Rack",
+    "item.serverage.workstation": "Workstation",
+    "item.serverage.conduit": "Conduit",
+
+    "item.serverage.switch_1u": "1u Switch",
+    "item.serverage.server_1u": "1u Server",
+    "item.serverage.server_2u": "2u Server",
+    "item.serverage.serial_console": "Serial Console",
+    "item.serverage.ethernet_cable": "Ethernet Cable",
+    "item.serverage.fiber_cable": "Fiber Cable"
+}

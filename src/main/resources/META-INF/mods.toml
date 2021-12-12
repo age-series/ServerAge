@@ -1,0 +1,28 @@
+modLoader="kotlinforforge"
+loaderVersion="[3,)"
+license="MIT"
+[[mods]]
+modId="serverage"
+version="${file.jarVersion}"
+displayName="Server Age"
+logoFile="serverage.png"
+authors="jrddunbr"
+description='''
+This is Server Age. It is a mod around linux and servers and .. well .. it's going to support serverless first.
+'''
+
+[[dependencies.serverage]]
+modId="forge"
+mandatory=true
+versionRange="[38,)"
+# An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+ordering="NONE"
+# Side this dependency is applied on - BOTH, CLIENT or SERVER
+side="BOTH"
+[[dependencies.serverage]]
+modId="minecraft"
+mandatory=true
+# This version range declares a minimum of the current minecraft version up to but not including the next major version
+versionRange="[1.18,1.19)"
+ordering="NONE"
+side="BOTH"
