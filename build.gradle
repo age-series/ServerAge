@@ -92,6 +92,9 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.18-38.0.16'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
+    // https://mvnrepository.com/artifact/software.amazon.awssdk/aws-sdk-java
+    compileOnly "software.amazon.awssdk:aws-sdk-java:2.17.99"
+
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
     // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency

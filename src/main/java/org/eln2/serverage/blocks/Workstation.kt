@@ -55,7 +55,7 @@ class WorkstationBlock: BaseEntityBlock(Properties.of(Material.STONE)) {
     }
 }
 
-class WorkstationItem: BlockItem(WorkstationBlock(), Properties().tab(ServerAge.serverAgeTab)) {
+class WorkstationItem: BlockItem(ServerAge.modBlocks["block.serverage.workstation"]!!, Properties().tab(ServerAge.serverAgeTab)) {
     val name = "workstation"
 
     override fun getDescriptionId(): String {

@@ -9,11 +9,11 @@ import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.HorizontalDirectionalBlock
 import net.minecraft.world.level.block.Mirror
 import net.minecraft.world.level.block.Rotation
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.material.Material
 import net.minecraft.world.phys.BlockHitResult
 import org.eln2.serverage.ServerAge
@@ -42,29 +42,29 @@ class ServerRackBlock: Block(Properties.of(Material.STONE)) {
             if (menuprovider != null) {
                 p_51534_.openMenu(menuprovider)
             }*/
-            LOGGER.info("${state?.getValue(HorizontalDirectionalBlock.FACING)}")
+            LOGGER.info("${state?.getValue(BlockStateProperties.FACING)}")
             InteractionResult.CONSUME
         }
     }
 
     override fun getStateForPlacement(context: BlockPlaceContext): BlockState? {
         val direction: Direction = context.horizontalDirection.opposite
-        return defaultBlockState().setValue(HorizontalDirectionalBlock.FACING, direction)
+        return defaultBlockState().setValue(BlockStateProperties.FACING, direction)
     }
 
     override fun rotate(state: BlockState, rotation: Rotation): BlockState? {
         return state.setValue(
-            HorizontalDirectionalBlock.FACING,
-            rotation.rotate(state.getValue(HorizontalDirectionalBlock.FACING))
+            BlockStateProperties.FACING,
+            rotation.rotate(state.getValue(BlockStateProperties.FACING))
         )
     }
 
     override fun mirror(state: BlockState, mirror: Mirror): BlockState? {
-        return state.rotate(mirror.getRotation(state.getValue(HorizontalDirectionalBlock.FACING)))
+        return state.rotate(mirror.getRotation(state.getValue(BlockStateProperties.FACING)))
     }
 
     override fun createBlockStateDefinition(definition: StateDefinition.Builder<Block?, BlockState?>) {
-        definition.add(HorizontalDirectionalBlock.FACING)
+        definition.add(BlockStateProperties.FACING)
     }
 
     init {
