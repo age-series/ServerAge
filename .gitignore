@@ -25,3 +25,4 @@ run/
 build/
 .idea/
 .gradle/
+logs/
