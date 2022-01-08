@@ -6,7 +6,7 @@ modId="serverage"
 version="${file.jarVersion}"
 displayName="Server Age"
 logoFile="serverage.png"
-authors="jrddunbr"
+authors="jrddunbr, bloxgate, Grissess, Caeleron"
 description='''
 This is Server Age. It is a mod around linux and servers and .. well .. it's going to support serverless first.
 '''

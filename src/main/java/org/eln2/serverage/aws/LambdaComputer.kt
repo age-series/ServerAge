@@ -202,10 +202,13 @@ fun main() {
 
     lc.createLambda(pythonCode, Runtime.PYTHON3_9)
 
+    val startTime = System.nanoTime()
+    var stopTime: Long = 0
     var tries = 1
     var done = false
-    while (tries <= 2 && !done) {
+    while (tries <= 100 && !done) {
         if (lc.isRunnable()) {
+            stopTime = System.nanoTime()
             try {
                 LOGGER.info(lc.isRunnable())
                 val resp = lc.runLambda("")
@@ -215,16 +218,24 @@ fun main() {
                 println("Could not run lambda: $e")
             }
         } else {
-            LOGGER.warn("Lambda ${lc.getFunctionArn()} is not runnable")
+            //LOGGER.warn("Lambda ${lc.getFunctionArn()} is not runnable")
         }
         tries += 1
         if (!done)
-            Thread.sleep(1000)
+            Thread.sleep(10)
     }
 
+    val timeMs = (stopTime - startTime) / 1_000_000
 
+    println("Time taken: $timeMs ms")
 
+    val startTime2 = System.nanoTime()
+    LOGGER.info(lc.runLambda(""))
+    val stopTime2 = System.nanoTime()
 
+    val timeMs2 = (stopTime2 - startTime2) / 1_000_000
+
+    println("Time taken to start/complete lambda: $timeMs2 ms")
 
     lc.deleteLambda()
 }
