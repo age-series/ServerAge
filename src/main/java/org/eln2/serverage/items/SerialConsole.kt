@@ -26,7 +26,10 @@ import org.eln2.serverage.ServerAge
 import org.eln2.serverage.ServerAge.serialConsoleMenuType
 
 class SerialConsole: Item(Properties().tab(ServerAge.serverAgeTab)) {
-    private val name: String  = "serial_console"
+    companion object {
+        const val name: String = "serial_console"
+    }
+
     override fun getDescriptionId() = "item.serverage.$name"
 
     init {
