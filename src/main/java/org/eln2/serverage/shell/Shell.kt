@@ -17,6 +17,101 @@ Provided a filesystem... for now I guess just use File?
 
  */
 
+open class Token
+class Word(val word: String): Token() {
+    override fun toString(): String = "Word(\"$word\")"
+}
+
+open class TokenizerException: RuntimeException()
+class UnbalancedQuote: TokenizerException()
+class Exhausted: TokenizerException()
+
+class Tokenizer(private val input: Iterator<Char>): Iterator<Token> {
+    companion object {
+        fun isSeparator(c: Char) = c.isWhitespace()
+
+        @JvmStatic
+        fun main(args: Array<String>) {
+            while(true) {
+                print("> ")
+                val line = readLine() ?: return
+                try {
+                    for(tok in Tokenizer(line.iterator())) {
+                        println("Token: $tok")
+                    }
+                    println("End tokens.")
+                } catch(_: UnbalancedQuote) {
+                    println("UnbalancedQuote")
+                } catch(_: Exhausted) {
+                    println("Exhausted")
+                }
+            }
+        }
+    }
+
+    private var buffer = ArrayList<Char>()
+    private var nextToken: Token? = null
+
+    private fun advance() {
+        var c: Char? = null
+        nextToken = null
+        while(input.hasNext()) {
+            c = input.next()
+            if(!isSeparator(c)) break
+        }
+        if(c == null) return
+        // Trampoline for multiple adjacent quoted strings, essentially
+        while(true) {
+            when (c) {
+                '"', '\'' -> {
+                    val eq = c
+                    var endQuote = false
+                    while (input.hasNext()) {
+                        c = input.next()
+                        if (c == eq) {
+                            endQuote = true
+                            break
+                        }
+                        buffer.add(c)
+                    }
+                    if(!endQuote) throw UnbalancedQuote()
+                    c = null
+                    // Fall through to next iteration to find a separator
+                }
+                else -> {
+                    // c can be null coming from a non-first iteration
+                    if(c != null) buffer.add(c)
+                    var seenQuote = false
+                    while (input.hasNext()) {
+                        c = input.next()
+                        if (isSeparator(c)) break
+                        if (c == '"' || c == '\'') {
+                            seenQuote = true
+                            break
+                        }
+                        buffer.add(c)
+                    }
+                    if(seenQuote) continue
+                    nextToken = Word(buffer.joinToString(""))
+                    buffer.clear()
+                    return
+                }
+            }
+        }
+    }
+
+    init { advance() }
+
+    override fun hasNext(): Boolean = nextToken != null
+
+    override fun next(): Token {
+        val tok = nextToken ?: throw Exhausted()
+        advance()
+        return tok
+    }
+}
+
+
 enum class ProgramState {
     SHELL,
     EDIT
