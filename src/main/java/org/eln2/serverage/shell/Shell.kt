@@ -63,7 +63,7 @@ class Tokenizer(private val input: Iterator<Char>): Iterator<Token> {
         // Trampoline for multiple adjacent quoted strings, essentially
         while(true) {
             when (c) {
-                '"', '\'' -> {
+                '"', '\'', '“', '”', '‘', '’' -> {
                     val eq = c
                     var endQuote = false
                     while (input.hasNext()) {
@@ -85,7 +85,7 @@ class Tokenizer(private val input: Iterator<Char>): Iterator<Token> {
                     while (input.hasNext()) {
                         c = input.next()
                         if (isSeparator(c)) break
-                        if (c == '"' || c == '\'') {
+                        if (c == '"' || c == '\'' || c == '“', c == '”', c == '‘', c == '’') {
                             seenQuote = true
                             break
                         }
