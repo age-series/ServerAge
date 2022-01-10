@@ -85,7 +85,7 @@ class Tokenizer(private val input: Iterator<Char>): Iterator<Token> {
                     while (input.hasNext()) {
                         c = input.next()
                         if (isSeparator(c)) break
-                        if (c == '"' || c == '\'' || c == '“', c == '”', c == '‘', c == '’') {
+                        if (c == '"' || c == '\'' || c == '“' || c == '”' || c == '‘' || c == '’') {
                             seenQuote = true
                             break
                         }
