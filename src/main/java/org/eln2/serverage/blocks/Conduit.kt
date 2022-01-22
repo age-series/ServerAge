@@ -10,23 +10,14 @@ import net.minecraft.world.item.context.BlockPlaceContext
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.LevelReader
 import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.ConduitBlock
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties.*
 import net.minecraft.world.level.material.Material
 import net.minecraft.world.phys.BlockHitResult
-import org.eln2.serverage.ServerAge
-import org.eln2.serverage.ServerAge.MODID
 import org.eln2.serverage.ServerAge.serverAgeTab
 
-
 class ConduitBlock: Block(Properties.of(Material.STONE)) {
-    val name = "conduit"
-
-    override fun getDescriptionId(): String {
-        return "block.serverage.$name"
-    }
 
     override fun use(
         state: BlockState?,
@@ -74,15 +65,15 @@ class ConduitBlock: Block(Properties.of(Material.STONE)) {
         val testState: BlockState = level.getBlockState(testPos)
         val testBlock: Block = testState.block
 
-        if (testBlock == ServerAge.modBlocks["block.serverage.conduit"]!!) {
+        if (testBlock == CONDUIT_BLOCK.get()) {
             val friend = testBlock as org.eln2.serverage.blocks.ConduitBlock
             friend.setConnections(level, testPos, testState)
         }
 
         return testBlock in listOf(
-            ServerAge.modBlocks["block.serverage.server_rack"]!!,
-            ServerAge.modBlocks["block.serverage.workstation"]!!,
-            ServerAge.modBlocks["block.serverage.conduit"]!!
+            SERVER_RACK_BLOCK.get(),
+            WORKSTATION_BLOCK.get(),
+            CONDUIT_BLOCK.get()
         )
     }
 
@@ -92,7 +83,6 @@ class ConduitBlock: Block(Properties.of(Material.STONE)) {
     }
 
     init {
-        setRegistryName(MODID, name)
         this.registerDefaultState(
             this.stateDefinition.any()
             .setValue(UP, false).setValue(DOWN, false)
@@ -102,14 +92,4 @@ class ConduitBlock: Block(Properties.of(Material.STONE)) {
     }
 }
 
-class ConduitItem: BlockItem(ServerAge.modBlocks["block.serverage.conduit"]!!, Properties().tab(serverAgeTab)) {
-    val name = "conduit"
-
-    override fun getDescriptionId(): String {
-        return "item.serverage.$name"
-    }
-
-    init {
-        setRegistryName(MODID, name)
-    }
-}
+class ConduitItem: BlockItem(CONDUIT_BLOCK.get(), Properties().tab(serverAgeTab))

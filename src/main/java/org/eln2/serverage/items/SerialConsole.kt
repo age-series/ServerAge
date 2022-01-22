@@ -12,7 +12,10 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.TextComponent
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.level.ServerPlayer
-import net.minecraft.world.*
+import net.minecraft.world.InteractionHand
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.InteractionResultHolder
+import net.minecraft.world.MenuProvider
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.inventory.AbstractContainerMenu
@@ -23,19 +26,8 @@ import net.minecraft.world.level.Level
 import net.minecraftforge.network.NetworkHooks
 import org.eln2.serverage.LOGGER
 import org.eln2.serverage.ServerAge
-import org.eln2.serverage.ServerAge.serialConsoleMenuType
 
 class SerialConsole: Item(Properties().tab(ServerAge.serverAgeTab)) {
-    companion object {
-        const val name: String = "serial_console"
-    }
-
-    override fun getDescriptionId() = "item.serverage.$name"
-
-    init {
-        setRegistryName(ServerAge.MODID, name)
-    }
-
     override fun use(level: Level, player: Player, hand: InteractionHand): InteractionResultHolder<ItemStack> {
         LOGGER.info("Got use call $level $player $hand")
         if (!level.isClientSide) {
@@ -67,7 +59,7 @@ class SerialConsoleGui(val level: Level, heldItem: ItemStack, private val invent
     }
 }
 
-class SerialConsoleMenu(int_of_some_kind: Int, val inventory: Inventory): AbstractContainerMenu(serialConsoleMenuType.get(), int_of_some_kind) {
+class SerialConsoleMenu(int_of_some_kind: Int, val inventory: Inventory): AbstractContainerMenu(SERIAL_CONSOLE_MENU_TYPE.get(), int_of_some_kind) {
     override fun stillValid(player: Player): Boolean {
         return true
     }

@@ -17,16 +17,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.minecraft.world.level.material.Material
 import net.minecraft.world.phys.BlockHitResult
 import org.eln2.serverage.ServerAge
-import org.eln2.serverage.ServerAge.MODID
-import org.eln2.serverage.ServerAge.modBlocks
 
 class ServerRackBlock: Block(Properties.of(Material.STONE)) {
-    val blockName = "server_rack"
-
-    override fun getDescriptionId(): String {
-        return "block.serverage.$blockName"
-    }
-
     override fun use(
         state: BlockState?,
         level: Level,
@@ -68,21 +60,10 @@ class ServerRackBlock: Block(Properties.of(Material.STONE)) {
     }
 
     init {
-        setRegistryName(MODID, blockName)
         /*registerDefaultState(
             stateDefinition.any().setValue(HorizontalDirectionalBlock.FACING, Direction.NORTH)
         )*/
     }
 }
 
-class ServerRackItem: BlockItem(modBlocks["block.serverage.server_rack"]!!, Properties().tab(ServerAge.serverAgeTab)) {
-    val itemName = "server_rack"
-
-    override fun getDescriptionId(): String {
-        return "item.serverage.$itemName"
-    }
-
-    init {
-        setRegistryName(MODID, itemName)
-    }
-}
+class ServerRackItem: BlockItem(SERVER_RACK_BLOCK.get(), Properties().tab(ServerAge.serverAgeTab))
