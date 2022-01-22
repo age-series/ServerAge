@@ -1,9 +1,11 @@
 {
     "itemGroup.Server_Age": "Server Age",
 
+    "block.serverage.python_event_computer": "Python Event Computer",
     "block.serverage.server_rack": "Server Rack",
     "block.serverage.workstation": "Workstation",
     "block.serverage.conduit": "Conduit",
+    "item.serverage.python_event_computer": "Python Event Computer",
     "item.serverage.server_rack": "Server Rack",
     "item.serverage.workstation": "Workstation",
     "item.serverage.conduit": "Conduit",

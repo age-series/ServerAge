@@ -1,14 +1,22 @@
 package org.eln2.serverage
 
+import net.minecraft.client.gui.screens.MenuScreens
 import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraftforge.api.distmarker.Dist
+import net.minecraftforge.fml.DistExecutor
 import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
+import net.minecraftforge.fml.loading.FMLEnvironment
+import net.minecraftforge.forgespi.Environment
 import net.minecraftforge.registries.DeferredRegister
 import net.minecraftforge.registries.ForgeRegistries
+import org.eln2.serverage.blocks.PYTHON_EVENT_COMPUTER_CONTAINER
+import org.eln2.serverage.blocks.PythonEventComputerScreen
 import org.eln2.serverage.blocks.SERVER_RACK_ITEM
 import org.eln2.serverage.blocks.blocksInit
 import org.eln2.serverage.items.itemsInit

@@ -1,10 +1,13 @@
 package org.eln2.serverage.blocks
 
+import net.minecraft.world.Container
+import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.item.Item
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.entity.BlockEntityType
 import net.minecraftforge.registries.RegistryObject
 import org.eln2.serverage.ServerAge
+import org.eln2.serverage.items.SerialConsoleMenu
 
 fun blocksInit() {
     // This is literally just to make these constants registered.
@@ -22,6 +25,12 @@ val PYTHON_EVENT_COMPUTER_BLOCK_ENTITY: RegistryObject<BlockEntityType<*>> = Ser
         ::PythonEventComputerBlockEntity,
         PYTHON_EVENT_COMPUTER_BLOCK.get()
     ).build(null)
+}
+val PYTHON_EVENT_COMPUTER_CONTAINER: RegistryObject<MenuType<PythonEventComputerContainer>> = ServerAge.containerRegistry.register(
+    PYTHON_EVENT_COMPUTER_NAME) {
+    MenuType<PythonEventComputerContainer> { id, inv ->
+        PythonEventComputerContainer(id, inv, inv.player)
+    }
 }
 
 const val SERVER_RACK_NAME = "server_rack"
