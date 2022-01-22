@@ -4,14 +4,17 @@ import java.io.ByteArrayOutputStream
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
-// https://stackoverflow.com/a/23613145
-fun createZip(fileContents: String, fileName: String): ByteArray {
+// Based on https://stackoverflow.com/a/23613145
+fun buildFilesystem(files: List<LambdaFile>): ByteArray {
     val baos = ByteArrayOutputStream()
     val zos = ZipOutputStream(baos)
 
-    val entry = ZipEntry(fileName)
-    zos.putNextEntry(entry)
-    zos.write(fileContents.toByteArray())
+    files.forEach {
+        val entry = ZipEntry(it.filename)
+        zos.putNextEntry(entry)
+        zos.write(it.fileContents)
+    }
+
     zos.closeEntry()
     zos.close()
     baos.flush()

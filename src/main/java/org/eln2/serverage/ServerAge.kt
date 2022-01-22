@@ -67,8 +67,8 @@ object ServerAge {
 
     private fun registerItems() {
         MOD_BUS.addGenericListener({ event: RegistryEvent.Register<Item> -> run {
-            // Switch(), Server1u(), Server2u(), EthernetCable(), FiberCable(), ServerRackItem(), WorkstationItem(), ConduitItem()
-            mutableListOf(LambdaServer(), SerialConsole()).forEach {
+
+            mutableListOf(LambdaServer(), SerialConsole(), Switch(), Server1u(), Server2u(), EthernetCable(), FiberCable(), ServerRackItem(), WorkstationItem(), ConduitItem()).forEach {
                     event.registry.register(it)
                 modItems[it.descriptionId] = it
             }
@@ -77,11 +77,10 @@ object ServerAge {
 
     private fun registerBlocks() {
         MOD_BUS.addGenericListener({event: RegistryEvent.Register<Block> -> run {
-            /*
             mutableListOf(ServerRackBlock(), WorkstationBlock(), ConduitBlock()).forEach {
                 event.registry.register(it)
                 modBlocks[it.descriptionId] = it
-            }*/
+            }
         }})
     }
 }

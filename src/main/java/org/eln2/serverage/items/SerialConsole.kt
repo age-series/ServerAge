@@ -89,8 +89,8 @@ class SerialConsoleScreen(val scm: SerialConsoleMenu, val inv: Inventory, compon
         //TODO: Implement textures
         RenderSystem.disableDepthTest()
         RenderSystem.setShader(GameRenderer::getPositionTexShader)
-        RenderSystem.setShaderTexture(0, BACKGROUND)
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f)
+        RenderSystem.setShaderTexture(0, BACKGROUND)
         val ps = RenderSystem.getModelViewStack()
         ps.pushPose()
         ps.clear()
